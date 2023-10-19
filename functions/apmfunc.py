@@ -417,7 +417,7 @@ def gwd(base, vwdEnabled=False):
         for alias in aliases:
             v = getV(alias)
 
-            incwd = v[3].strip() == cwd
+            incwd = cwd in v[3].strip()
 
             if incwd:
                 if len(v) >= 4:
