@@ -263,39 +263,41 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
         contents = open(tbuLoc, 'r').read()
         f = open(loc, 'w')
         f.write(contents)
+
+
+        # Upload data onto RAPM
+
+        iteration = extract(fileName, tbuLoc).get('iteration')
+        filtered = filterData(getData(base), '@c|'+fileName)
+
+        v = None
+        lastIteration = None
+
+        if len(filtered) >= 1:
+            v = getV(filtered[0])
+            lastIteration = v[2]
+
+
+        if not iteration:
+            print(error('An iteration declaration in the file metadata is needed in order to be uploaded to Root APM.'))
+            return False
+        
+        if lastIteration and iteration == lastIteration:
+            print(error('Your version is the same. Change it.'))
+            return False
+
+        if not overwrite:
+            addRow(base, 'c', fileName, iteration, 0)
+        elif overwrite and v:
+            editRow(base, 'c',  v[1], v[2], v[3],  fileName, iteration, 0)
+
+        # Success!
+        print(success('Successfully completed creation/update process!'))
+        # except:
+        #     print(error('File "{f}" does not exist in this directory.').format(f=fileName))
+
     except:
         print(error('File does not exist!'))
-
-    # Upload data onto RAPM
-
-    iteration = extract(fileName, tbuLoc).get('iteration')
-    filtered = filterData(getData(base), '@c|'+fileName)
-
-    v = None
-    lastIteration = None
-
-    if len(filtered) >= 1:
-        v = getV(filtered[0])
-        lastIteration = v[2]
-
-
-    if not iteration:
-        print(error('An iteration declaration in the file metadata is needed in order to be uploaded to Root APM.'))
-        return False
-    
-    if lastIteration and iteration == lastIteration:
-        print(error('Your version is the same. Change it.'))
-        return False
-
-    if not overwrite:
-        addRow(base, 'c', fileName, iteration, 0)
-    elif overwrite and v:
-        editRow(base, 'c',  v[1], v[2], v[3],  fileName, iteration, 0)
-
-    # Success!
-    print(success('Successfully completed creation/update process!'))
-    # except:
-    #     print(error('File "{f}" does not exist in this directory.').format(f=fileName))
 
 def deleteComponent(base, componentName, throwErrorOnNotExists):
     componentLoc = formatBase(base, '/modules/{0}'.format(componentName))
