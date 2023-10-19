@@ -280,10 +280,12 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
 
         if not iteration:
             print(error('An iteration declaration in the file metadata is needed in order to be uploaded to Root APM.'))
+            os.remove(loc)
             return False
         
         if lastIteration and iteration == lastIteration:
             print(error('Your version is the same. Change it.'))
+            os.remove(loc)
             return False
 
         if not overwrite:
@@ -298,6 +300,7 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
 
     except:
         print(error('File does not exist!'))
+        os.remove(loc)
 
 def deleteComponent(base, componentName, throwErrorOnNotExists):
     componentLoc = formatBase(base, '/modules/{0}'.format(componentName))
