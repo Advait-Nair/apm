@@ -285,7 +285,6 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
         
         if lastIteration and iteration == lastIteration:
             print(error('Your version is the same. Change it.'))
-            os.remove(loc)
             return False
 
         if not overwrite:
@@ -300,7 +299,6 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
 
     except:
         print(error('File does not exist!'))
-        os.remove(loc)
 
 def deleteComponent(base, componentName, throwErrorOnNotExists):
     componentLoc = formatBase(base, '/modules/{0}'.format(componentName))
