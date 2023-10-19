@@ -259,9 +259,12 @@ def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNot
     # try:
 
     # Flash file onto RAPM
-    contents = open(tbuLoc, 'r').read()
-    f = open(loc, 'w')
-    f.write(contents)
+    try:
+        contents = open(tbuLoc, 'r').read()
+        f = open(loc, 'w')
+        f.write(contents)
+    except:
+        print(error('File does not exist!'))
 
     # Upload data onto RAPM
 
