@@ -84,7 +84,7 @@ def main(prompt):
                 i+=1
             
             for arg in sys.argv:
-                print(12)
+                # print(12)
                 mlist = zeroFlags(arg, mlist)
 
 

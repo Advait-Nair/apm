@@ -177,7 +177,7 @@ def intoBulletPoint(base, isdepr, no, info, fileName):
     else:
         r = str(no)+'. {2}' + info.get('name') + '{3}{1} ['+fileName+']{4}\n'
     
-    print(base, isdepr, no, info, fileName)
+    # print(base, isdepr, no, info, fileName)
 
     skipPrint = 'iteration, sameIteratedCopies, size'
     for tag in dict.keys(info):
@@ -191,7 +191,7 @@ def intoBulletPoint(base, isdepr, no, info, fileName):
             content = info.get(tag)
             r+= '   -> {3}'+tag+': {4}{1}'+content+'{4}\n'
     registeredCopies = filterData(getData(base), '@c|'+fileName.lower())
-    print(registeredCopies)
+    # print(registeredCopies)
     if len(registeredCopies) != 0:
         registeredCopies = getV(registeredCopies[0])[3]
     else:
