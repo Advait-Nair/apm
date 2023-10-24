@@ -43,7 +43,7 @@ elif mode == 'bash':
 
 try:
     print('PROCESS: Creating masterdata.apm')
-    md = open('masterdata.apm', 'n')
-    print(success('PROCESS: masterdata.apm SUCCESS'))
+    md = open('masterdata.apm', 'x')
+    print(success('PROCESS: masterdata.apm CREATION SUCCESS'))
 except:
-    print(error('ERROR: masterdata.apm creation FAIL: Likely already exists'))
+    print(error('ERROR: masterdata.apm CREATION FAIL: Likely already exists'))
