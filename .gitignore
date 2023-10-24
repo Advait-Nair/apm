@@ -1,3 +1,4 @@
 masterdata.*
 masterdata.apmc
 modules/**
+.DS_Store
