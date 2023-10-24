@@ -3,6 +3,49 @@
 Adva Package Manager, abbreviated to apm, is a complete, localised file duplication, tracking and managing system that allows users to streamline, speed up and centralise their workflow. It utilises a CLI (Command Line Interface) from which the apm software can be easily accessed.
 <br>
 
+## SETUP
+
+### Information: Prerequistes
+You need a machine running Unix, or an emulator capable of executing bash/zsh shell commands.
+
+Python must be installed for apm to function. Git is recommended to clone this repo to your machine.
+
+- Unix machine/emulator/VM
+- Python 3
+- Git (Recommended)
+
+
+---
+
+### Part I: Installation
+
+1. Navigate to home directory:
+```shell
+cd ~
+```
+2. Clone repo to home directory: 
+```shell
+git clone https://github.com/Advait-Nair/apm.git
+```
+
+### Part II: Auto-setup
+
+3. Navigate to your apm directory
+```shell
+cd ~/apm
+```
+4. Run setup.py
+```shell
+python3 setup.py
+```
+
+## Part III: Enjoy!
+
+Enjoy using APM. Do not forget to flag any bug reports for fixing as this is still an early version!
+
+<br><br>
+# Documentation
+
 ## HOW IT WORKS
 
 APM allows you to create 'components', also known as 'modules', which are files you upload to APM. Think of this file as the source file. You can upload as many as you want.
@@ -56,7 +99,7 @@ apm prettify - Expand masterdata.apm and make it readable.
 
 apm globalunloadall - Unload every component in existence. WARNING! PROJECTS MAY STOP WORKING!
 
-# Restore Saved (RSV)
+## RESTORE SAVED (RSV)
 apm getrsv - Use a stored manual backup.
 apm rsv - Create a custom manual backup.
 apm delrsv - Delete a custom manual backup.

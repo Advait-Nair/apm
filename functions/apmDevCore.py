@@ -19,6 +19,8 @@ apmdevhelp = apmhelp+"""
 
 {4}{3}apmdev delete{1} - Delete a module
 
+{4}{3}apmdev metagen{1} - Generate Metadata
+
 {4}{3}apm view{1} - view all installed components.
         -> -s: Filter components by name or type
             -> name:NAME type:FILETYPE
@@ -88,14 +90,81 @@ def main(prompt):
                 print(subtitle('\nDeleting component...')+'\n')
                 deleteComponent(sys.argv[0], componentId, True)
 
-    elif prompt == 'view':
-        print(title('View All Components'))
+    # elif prompt == 'view':
+    #     print(title('View All Components'))
 
     
     elif prompt == 'help':
         print(apmdevhelp)
 
+    elif prompt == 'metagen':
+        print(title('\nMetadata Generator\n'))
+        print(italic('Follow the prompts, use COMPL to exit and finish.'))
+        print(error('NOTE: Name, Iteration and Descriptions are mandatory!\n'))
 
+        name = input('Name > ').strip()
+        iteration = input('Iteration > ').strip()
+        desc = input('Description > ').strip()
+
+        e = False
+        try:
+            inti = int(iteration)
+            if inti < 0:
+                e = True
+        except:
+            e = True
+
+        
+        if e:
+            print(error('Iteration must be a positive integer!'))
+            return
+
+        if(name and iteration and desc):
+            print(success('\nMandatory Fields Complete! You may add additional fields.\nA commit field is highly recommended for version change info and clarity.\n'))
+        else:
+            print(error('\nNice try, fill them all please.'))
+            return
+        
+
+        metaDict = {
+            'name': name,
+            'iteration': iteration,
+            'description': desc
+        }
+        
+        compl = False
+        
+        print('Additional Tags: (COMPL to finish)\n')
+        while not compl:
+            tag = input('\nTag? Name > ').strip().lower()
+
+
+            if tag == 'compl':
+                compl = True
+                break
+            value = input('{tag} Value? > '.format(tag=tag)).strip().lower()
+
+            if tag == 'name' or tag == 'description' or tag == 'iteration':
+                print(error('Do not use these parameters again!'))
+            else:
+                metaDict[tag] = value
+
+        mapped = ''
+
+        for tag in dict.keys(metaDict):
+            mapped += '{tag}:: {value}\n'.format(tag=tag, value=metaDict[tag])
+        
+        out = '\n%%%apm%%%\n\n{content}\n%%%apm%%%\n'.format(content=mapped)
+        print(success('\n\nOUTPUT'))
+        print(out + '\n')
+        exportapmeta = input('Do you wish to export this to a .apmeta file? [Y/N] > ').strip().lower()
+
+        if exportapmeta in 'yes ye ya yeh yeah yea yess yeahs yee yeahh':
+            # Export
+            f = open('{name}-metagen.apmeta'.format(name=name), 'w')
+            f.write(out)
+        else:
+            print(success('\nProcess Complete.\n'))
 
 
 

@@ -1,6 +1,7 @@
-from spectrum import error
+from spectrum import error, success
 import os
 import textwrap
+import math
 
 jumpLength = os.get_terminal_size().columns -19
 # def regulateLength(text):
@@ -29,7 +30,9 @@ jumpLength = os.get_terminal_size().columns -19
 
 
 def extract(fileName, filePath):
-    text = open(filePath).readlines()
+    # Ignore hidden files
+    if list(fileName.strip())[0] == '.': return -239
+    text = open(filePath, 'r').readlines()
 
     metadata = {}
 
@@ -62,7 +65,7 @@ def extract(fileName, filePath):
     except:
         metadata['\n\nAPM Exception Informer'] = error("This is not a meta tag. This is an error informing you that an internal APM Process, apmModuleInfoExtractor:extract() failed to extract information from \"{0}\". This is possibly due to improper formatting of the file.".format(fileName))
     
-    metadata['size'] = '{0} lines totalling {1}kB'.format(len(text), os.path.getsize(filePath)/1024)
+    metadata['size'] = '{0} lines totalling {1}kB'.format(len(text), math.ceil(os.path.getsize(filePath)/1024))
 
     return metadata
 

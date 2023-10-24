@@ -217,7 +217,8 @@ def formatModuleList(base, list):
 
         fileInfo = extract(file, formatBase(base, '/modules/'+file))
         # print(file, fileInfo)
-        text = intoBulletPoint(base, isdeprecated, listNo, fileInfo, file)
+        if fileInfo == -239: text = None
+        else: text = intoBulletPoint(base, isdeprecated, listNo, fileInfo, file)
         if text:
             p += ('\n\n'+text+'\n\n')
 
@@ -238,7 +239,8 @@ def verifyModuleInformationIntegrity():
 
 # apmdev
 
-def createComponent(base, fileName, overwrite=False, throwErrorOnOverwriteAndNotExists=False):
+def createComponent(base, fileNameRaw, overwrite=False, throwErrorOnOverwriteAndNotExists=False):
+    fileName = fileNameRaw.lower()
     cwd = os.getcwd()
 
     loc = formatBase(base, '/modules/')+fileName
