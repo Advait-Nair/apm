@@ -53,11 +53,17 @@ def config_bash_profile():
 def config_apmshell(np):
     print('PROCESS: APM.SH CONFIG')
     replacing = '.zprofile'
+    replacebin = 'bash'
+    newbin = 'zsh'
     if np == '.zprofile':
         replacing = '.bash_profile'
+    elif np == '.bash_profile':
+        replacebin = 'zsh'
+        newbin = 'bash'
+
     try:
         apmsh = open(apmshloc, 'r').read()
-        open(apmshloc, 'w').write(apmsh.replace(replacing,np))
+        open(apmshloc, 'w').write(apmsh.replace(replacing,np).replace('bin/'+replacebin,'bin/'+newbin))
         print(success('PROCESS: APM.SH CONFIG SUCCESS'))
     except:
         print(error('PROCESS: APM.SH CONFIG FAIL'))
@@ -66,7 +72,8 @@ def config_apmshell(np):
     try:
         print('PROCESS: APMDEV.SH CONFIG')
         apmdevsh = open(apmdevshloc, 'r').read()
-        open(apmdevshloc, 'w').write(apmdevsh.replace(replacing,np))
+        open(apmdevshloc, 'w').write(apmdevsh.replace(replacing,np).replace('bin/'+replacebin,'bin/'+newbin))
         print(success('PROCESS: APMDEV.SH CONFIG SUCCESS'))
     except:
         print(error('PROCESS: APMDEV.SH CONFIG FAIL'))
+    

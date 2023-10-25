@@ -2,3 +2,6 @@ masterdata.*
 masterdata.apmc
 modules/**
 .DS_Store
+*.pyc
+functions/__pycache__/**
+functions/__pycache__
