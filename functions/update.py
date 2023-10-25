@@ -1,8 +1,13 @@
-def KeyLang(text, sep=' '):
-    apmv = open('.apmv', 'r').read()
+import spectrum
+
+def KeyLang(rtext, separator=' '):
 
     # Tab Separated Key Value Pairs
-    tskvp = apmv.split(sep)
+    text = rtext
+    try:
+        text = rtext.decode('utf-8')
+    except: pass
+    tskvp = text.split(separator)
 
     data = {}
 
@@ -13,9 +18,9 @@ def KeyLang(text, sep=' '):
             isKey = i % 2 == 0
             
             if isKey:
-                data[tskvp[i]] = tskvp[i+1]
+                data[tskvp[i].strip()] = tskvp[i+1].strip()
     except:
-        print('keylang process error at internal update check process: mutated .apmv')
+        print(spectrum.error('keylang process error at internal update check process: mutated .apmv'))
         return {}
     
     return data
@@ -38,6 +43,12 @@ def _getapmv():
 
 metadata = _getapmv()
 
-import urllib
+import urllib.request as internet
 
-urllib.urlopen()
+latest = 'https://raw.githubusercontent.com/Advait-Nair/apm/main/.apmv'
+content = internet.urlopen(latest).read()
+latestMetadata = KeyLang(content)
+
+
+if content.strip() != metadata:
+    print(spectrum.subtitle('Your current APM Version [{cv}] can be updated to the latest version [{lv}]. Run apm update to do so.').format(cv=metadata.get('?VERSION'),lv=latestMetadata.get('?VERSION') or '?unknown'))
