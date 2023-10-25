@@ -221,8 +221,7 @@ def formatModuleList(base, list):
         else: text = intoBulletPoint(base, isdeprecated, listNo, fileInfo, file)
         if text:
             p += ('\n\n'+text+'\n\n')
-
-        listNo += 1
+            listNo += 1
     return p.format(
     col('info-h'), # 0 is title
     col('italic'), # 1 is italic
