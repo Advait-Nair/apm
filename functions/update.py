@@ -28,27 +28,23 @@ def KeyLang(rtext, separator=' '):
 
 import os
 
-baseLoc = os.getcwd()
-if 'apm' in baseLoc:
-    baseLoc = baseLoc.replace('apm', '')
-else:
-    baseLoc = baseLoc + '/'
 
-baseLoc = baseLoc.replace('//', '/')
 
-def _getapmv():
-    apmv = open(baseLoc+'apm/.apmv', 'r').read()
+def _getapmv(base):
+    apmv = open(base+'.apmv', 'r').read()
     data = KeyLang(apmv)
     return data
 
-metadata = _getapmv()
 
-import urllib.request as internet
+def checkv(base):
+    metadata = _getapmv(base)
 
-latest = 'https://raw.githubusercontent.com/Advait-Nair/apm/main/.apmv'
-content = internet.urlopen(latest).read()
-latestMetadata = KeyLang(content)
+    import urllib.request as internet
+
+    latest = 'https://raw.githubusercontent.com/Advait-Nair/apm/main/.apmv'
+    content = internet.urlopen(latest).read()
+    latestMetadata = KeyLang(content)
 
 
-if content.strip() != metadata:
-    print(spectrum.subtitle('Your current APM Version [{cv}] can be updated to the latest version [{lv}]. Run apm update to do so.').format(cv=metadata.get('?VERSION'),lv=latestMetadata.get('?VERSION') or '?unknown'))
+    if latestMetadata.get('?VERSION') != metadata.get('?VERSION').strip():
+        print(spectrum.subtitle('Your current APM Version [{cv}] can be updated to the latest version [{lv}]. Run apm update to do so.').format(cv=metadata.get('?VERSION'),lv=latestMetadata.get('?VERSION') or '?unknown'))

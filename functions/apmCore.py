@@ -17,6 +17,10 @@ sysprompt = "vwd"
 if sys.argv and len(sys.argv) > 2:
     sysprompt = sys.argv[2]
 
+from update import checkv
+checkv(formatBase(sys.argv[0],'/'))
+
+
 # ! Zero-arg flag definers
 def zeroFlags(flag, mlist):
     mlist2=[]
