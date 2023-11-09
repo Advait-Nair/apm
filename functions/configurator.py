@@ -13,10 +13,7 @@ def exists(filePath):
 _zsh='.zshrc'
 _bash='.bashrc'
 
-if not exists('~/'+_zsh):
-    open('~/'+_zsh, 'n')
-if not exists('~/'+_bash):
-    open('~/'+_bash, 'n')
+
 
 
 zpc="""\n\nalias apm=~/apm/apm.sh
@@ -38,36 +35,46 @@ baseLoc = baseLoc.replace('//', '/')
 apmshloc = baseLoc + 'apm/apm.sh'
 apmdevshloc = baseLoc + 'apm/apmdev.sh'
 
+
+_zshpath=baseLoc+'/'+_zsh
+_bashpath=baseLoc+'/'+_bash
+
+
+
 print(baseLoc)
-def config_zprofile():
-    zprofile = None
+def config_zrc():
+    if not exists(_zshpath):
+        open(_zshpath, 'w')
+    zrc = None
     try:
-        zprofile = open(baseLoc+_zsh,'r').read().replace(zpc, '').replace(bpc, '')
+        zrc = open(baseLoc+_zsh,'r').read().replace(zpc, '').replace(bpc, '')
     except:
-        print(error('PROCESS: ZSH CONFIG FAIL: Likely profile does not exist.'))
+        print(error('PROCESS: ZSH CONFIG FAIL: Likely rc does not exist.'))
         return
     try:
         print('PROCESS: ZSH CONFIG')
-        open(baseLoc+_zsh,'w').write(zprofile+zpc)
+        open(baseLoc+_zsh,'w').write(zrc+zpc)
         print(success('PROCESS: ZSH CONFIG SUCCESS'))
     except:
         print(error('PROCESS: ZSH CONFIG ERROR'))
-        open(baseLoc+_zsh,'w').write(zprofile)
+        open(baseLoc+_zsh,'w').write(zrc)
 
-def config_bash_profile():
-    bash_profile = None
+def config_bash_rc():
+    if not exists(_bashpath):
+        open(_bashpath, 'w')
+    bash_rc = None
     try:
-        bash_profile = open(baseLoc+_bash,'r').read().replace(zpc, '').replace(bpc, '')
+        bash_rc = open(baseLoc+_bash,'r').read().replace(zpc, '').replace(bpc, '')
     except:
-        print(error('PROCESS: BASH CONFIG FAIL: Likely profile does not exist.'))
+        print(error('PROCESS: BASH CONFIG FAIL: Likely rc does not exist.'))
         return
     try:
         print('PROCESS: BASH CONFIG')
-        open(baseLoc+_bash,'w').write(bash_profile+bpc)
+        open(baseLoc+_bash,'w').write(bash_rc+bpc)
         print(success('PROCESS: BASH CONFIG SUCCESS'))
     except:
         print(error('PROCESS: BASH CONFIG ERROR'))
-        open(baseLoc+_bash,'w').write(bash_profile)
+        open(baseLoc+_bash,'w').write(bash_rc)
 
 def config_apmshell(np):
     print('PROCESS: APM.SH CONFIG')

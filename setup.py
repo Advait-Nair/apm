@@ -1,6 +1,6 @@
 from functions.spectrum import success, error, title, subtitle, italic, bold
 
-from functions.configurator import config_apmshell, config_zprofile, config_bash_profile
+from functions.configurator import config_apmshell, config_zrc, config_bash_rc
 
 print(title('\nWELCOME TO APM!'))
 print(italic('This setup guide will run you through some choices to configure APM for your machine.\n'))
@@ -31,14 +31,14 @@ if mode == 'zsh':
     print(subtitle('\nZSH CONFIG'))
     print(italic('apm has been zsh-configurated out of the box.\n'))
 
-    config_zprofile()
-    config_apmshell('.zprofile')
+    config_zrc()
+    config_apmshell('.zrc')
 elif mode == 'bash':
     print(subtitle('\nBASH CONFIG'))
     print(italic('apm needs to be configured for bash.\n'))
 
-    config_bash_profile()
-    config_apmshell('.bash_profile')
+    config_bash_rc()
+    config_apmshell('.bashrc')
 
 
 try:
