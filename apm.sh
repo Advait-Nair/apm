@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-source ~/.zprofile
+source ~/.zshrc
 
 cd=$(pwd)
 

@@ -32,7 +32,7 @@ if mode == 'zsh':
     print(italic('apm has been zsh-configurated out of the box.\n'))
 
     config_zrc()
-    config_apmshell('.zrc')
+    config_apmshell('.zshrc')
 elif mode == 'bash':
     print(subtitle('\nBASH CONFIG'))
     print(italic('apm needs to be configured for bash.\n'))

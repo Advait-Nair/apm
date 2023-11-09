@@ -78,9 +78,11 @@ def config_bash_rc():
 
 def config_apmshell(np):
     print('PROCESS: APM.SH CONFIG')
-    replacing = _zsh
+    
     replacebin = 'bash'
     newbin = 'zsh'
+
+    replacing = _zsh
     if np == _zsh:
         replacing = _bash
     elif np == _bash:
