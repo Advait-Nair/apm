@@ -2,13 +2,24 @@ from functions.spectrum import success, error, title, subtitle, italic, bold
 
 from functions.configurator import config_apmshell, config_zrc, config_bash_rc
 
-print(title('\nWELCOME TO APM!'))
-print(italic('This setup guide will run you through some choices to configure APM for your machine.\n'))
-input(italic('PRESS ANY KEY TO CONTINUE > '))
-print('\n')
-
 back = True
 mode = 'zsh'
+
+import sys
+if sys.argv and len(sys.argv) >= 2:
+    mode = sys.argv[1]
+    # print(italic(mode))
+    back = False
+
+else:
+    print(title('\nWELCOME TO APM!'))
+    print(italic('This setup guide will run you through some choices to configure APM for your machine.\n'))
+    input(italic('PRESS ANY KEY TO CONTINUE > '))
+    print('\n')
+
+
+
+
 while back:
     shell = input(bold('Are you running a BASH or ZSH shell?: [BASH/ZSH] > '))
     confirmation = ''
@@ -26,6 +37,12 @@ while back:
         back = False
     else:
         print(italic('\nReturning...\n'))
+
+
+if mode != 'bash' and mode != 'zsh':
+    print(error(mode+' is not a valid shell for apm!'))
+    exit(24)
+
 
 if mode == 'zsh':
     print(subtitle('\nZSH CONFIG'))
@@ -47,3 +64,12 @@ try:
     print(success('PROCESS: masterdata.apm CREATION SUCCESS'))
 except:
     print(error('ERROR: masterdata.apm CREATION FAIL: Likely already exists'))
+
+
+
+from functions.keylang import WriteKeyLang, KLMap
+
+new = WriteKeyLang(key='?SHELL',value=mode, data=open('.shell.kl','r').read().strip())
+print(new)
+open('.shell.kl','w').write(KLMap(new))
+

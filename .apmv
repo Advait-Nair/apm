@@ -1,1 +1,6 @@
-?VERSION 1.2.1
+?VERSION
+1.4.0
+?CHANGELOG
+Fixes_&_Updates_including_zsh_&_bash_rc_on_terminal_startup
+?UPDATE_SET
+functions(*)+setup.py+apm.sh+apmdev.sh+README.md

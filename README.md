@@ -38,6 +38,10 @@ cd ~/apm
 ```shell
 python3 setup.py
 ```
+Tip: When running setup.py, to speed up the process, you can insert your shell, zsh or bash, as an argument.
+```shell
+python3 setup.py zsh/bash
+```
 
 ## Part III: Enjoy!
 
