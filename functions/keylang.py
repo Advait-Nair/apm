@@ -1,5 +1,8 @@
-
-import functions.spectrum as spectrum
+spectrum = None
+try:
+    import functions.spectrum as spectrum
+except:
+    import spectrum as spectrum
 
 def KeyLang(rtext, separator=' '):
 
