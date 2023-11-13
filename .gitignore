@@ -5,3 +5,4 @@ modules/**
 *.pyc
 functions/__pycache__/**
 functions/__pycache__
+slideprint.py

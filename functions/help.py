@@ -4,6 +4,8 @@ apmhelp = """
 {1}A complete CLI Tool for managing, fetching and updating reusable developer components.{4}
 
 {4}{3}apm about{1} - About apm
+{4}{3}apm upgrade{1} - Upgrade apm to latest version
+Use -v or -verbose for apm upgrade verbose messaging
 
 {2}FUNCTIONS:{4}
 

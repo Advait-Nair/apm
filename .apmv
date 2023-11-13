@@ -1,6 +1,10 @@
 ?VERSION
-1.4.1
+1.4.0
 ?CHANGELOG
 Fixes_&_Updates_including_zsh_&_bash_rc_on_terminal_startup
 ?UPDATE_SET
-functions(*)+setup.py+apm.sh+apmdev.sh+README.md
+functions(x.py+y.py),setup.py+apm.sh+apmdev.sh+README.md,folder(z.py+m.py)
+?DELETE_SET
+/
+?APPEND_SET
+/

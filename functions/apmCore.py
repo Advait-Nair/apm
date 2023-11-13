@@ -1,7 +1,7 @@
 import sys
 import os
 from spectrum import col, title, subtitle, italic, bold, error, success
-
+# from slideprint import print
 from apmfunc import arglen, loadFileOntoCurrentDirectory, unloadFileFromDirectory, verifyModuleInformationIntegrity, formatBase, getAllModules, formatModuleList, vwd, gwd, checkExistenceOfFile, isdepr
 
 from apmex2 import restore, addRow, deleteRow, prettify, uglify, getData, filterData, getV, customBackup, backupToCustom, removeCustomBackup, getBackups, getFile, x
@@ -13,12 +13,13 @@ from help import apmhelp
 verifyModuleInformationIntegrity()
 
 
+
+
 sysprompt = "vwd"
 if sys.argv and len(sys.argv) > 2:
     sysprompt = sys.argv[2]
 
-from update import checkv
-checkv(formatBase(sys.argv[0],'/'))
+from update import checkv, UPDATE_APM
 
 
 # ! Zero-arg flag definers
@@ -49,6 +50,13 @@ def main(prompt):
             # pwd apm load COMPONENT i = 3
             componentId = sys.argv[3]
             loadFileOntoCurrentDirectory(sys.argv[0], componentId, flag)
+
+    elif prompt == 'upgrade':
+        v = False
+        if arglen(sys.argv, 3):
+            if sys.argv[3] == '-v' or sys.argv[3] == '-verbose':
+                v = True
+        UPDATE_APM(formatBase(sys.argv[0],'/'), v)
 
     elif prompt == 'vwd':
         vwd(sys.argv[0])
@@ -264,3 +272,5 @@ Use apm help for commands!
 #             stay = False
 # else:
 main(sysprompt)
+if sysprompt != 'upgrade':
+    checkv(formatBase(sys.argv[0],'/'))

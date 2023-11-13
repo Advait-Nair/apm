@@ -1,6 +1,6 @@
 import sys
 from spectrum import col, title, subtitle, italic, bold, error, success
-
+# from slideprint import print
 from apmfunc import arglen, loadFileOntoCurrentDirectory, unloadFileFromDirectory, verifyModuleInformationIntegrity, formatBase, createComponent, deprecation, deleteComponent
 
 from apmex2 import restore, addRow, deleteRow, prettify, uglify
